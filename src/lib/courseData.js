@@ -21,13 +21,268 @@ export const WEEKS = [
     mentor: { key: "mitul", topic: "How to Think About Yourself as a Problem",
       agenda: "Mitul will teach you a framework for breaking any problem into parts — and this week, YOU are the problem to solve. He'll help you separate 'what I think I should want' from 'what I actually care about.' Come with your Flow State list ready.",
       prepQuestion: "Write down: 'What is one thing I do that I'm good at but never thought of as a skill?'" },
-    learning: { title: "Watch & Read Before You Start", items: [
-      { type: "youtube", label: "Ikigai — Finding Your Purpose (Animated)", search: "ikigai explained simple animation", why: "Japanese concept mapping what you love, what you're good at, what the world needs, and what you can be paid for.", duration: "5-8 min" },
-      { type: "youtube", label: "How to Know Your Strengths", search: "Ali Abdaal how to find your strengths", why: "Practical framework for auditing your real skills vs. assumptions.", duration: "10-15 min" },
-      { type: "youtube", label: "The Danger of Following Your Passion", search: "Cal Newport passion hypothesis craftsman mindset TEDx", why: "Cal Newport says 'follow your passion' is backwards. This will shift how you think about career choice.", duration: "12 min" },
-      { type: "read", label: "Article: 'So Good They Can't Ignore You' Summary", search: "Cal Newport so good they can't ignore you book summary key ideas", why: "Core idea: skills trump passion.", duration: "10 min read" },
-      { type: "youtube", label: "What Are Transferable Skills?", search: "transferable skills explained examples career", why: "You have more skills than you think.", duration: "6 min" },
-    ]},
+    // ─────────────────────────────────────────────────────────────
+// PASTE THIS AS THE `learning` PROPERTY OF WEEK 1 in courseData.js
+// Replace the existing learning: { ... } block for Week 1
+// ─────────────────────────────────────────────────────────────
+
+learning: {
+  title: "Watch, Read & Reflect — Week 1 (6-8 hrs)",
+  items: [
+    // ── SECTION: KNOW YOURSELF ─────────────────────────────
+    {
+      section: "Know Yourself First",
+      type: "youtube",
+      label: "Ikigai — Finding Your Purpose (Animated)",
+      search: "ikigai explained simple animation",
+      why: "Japanese concept mapping what you love, what you're good at, what the world needs, and what you can earn from. The foundation of everything this week.",
+      duration: "5-8 min",
+      noteKey: "w1_ikigai"
+    },
+    {
+      section: "Know Yourself First",
+      type: "youtube",
+      label: "How to Know Your Strengths — Ali Abdaal",
+      search: "Ali Abdaal how to find your strengths",
+      why: "Practical framework for auditing your real skills vs. what you assume about yourself. Watch before the Mirror Interview activity.",
+      duration: "10-15 min",
+      noteKey: "w1_strengths"
+    },
+    {
+      section: "Know Yourself First",
+      type: "youtube",
+      label: "The Danger of Following Your Passion — Cal Newport",
+      search: "Cal Newport passion hypothesis craftsman mindset TEDx",
+      why: "Most people say 'follow your passion.' Cal Newport says that's backwards. This will shift how you think about career choice fundamentally.",
+      duration: "12 min",
+      noteKey: "w1_passion"
+    },
+    {
+      section: "Know Yourself First",
+      type: "youtube",
+      label: "What Are Transferable Skills?",
+      search: "transferable skills explained examples career",
+      why: "You have more skills than you think. This helps you see everyday abilities as career assets — critical before the Flow State exercise.",
+      duration: "6 min",
+      noteKey: "w1_transferable"
+    },
+
+    // ── SECTION: DEPTH VS BREADTH ──────────────────────────
+    {
+      section: "Depth vs. Breadth",
+      type: "youtube",
+      label: "Generalist vs Specialist — Which Should You Be?",
+      search: "generalist vs specialist career which is better 2024",
+      why: "Should you go deep on one thing or know a little about many things? This is one of the most important early career questions. Watch before forming an opinion.",
+      duration: "10 min",
+      noteKey: "w1_gen_vs_spec"
+    },
+    {
+      section: "Depth vs. Breadth",
+      type: "youtube",
+      label: "The T-Shaped Person — Why It Beats Both",
+      search: "T-shaped person skills explained career depth breadth",
+      why: "The best career model isn't pure generalist OR pure specialist — it's a T. Broad awareness + deep expertise in one area. This concept will shape your Week 14 path decision.",
+      duration: "8 min",
+      noteKey: "w1_tshaped"
+    },
+    {
+      section: "Depth vs. Breadth",
+      type: "youtube",
+      label: "The 10,000 Hour Rule — Is It Real?",
+      search: "10000 hour rule Malcolm Gladwell explained is it true",
+      why: "Malcolm Gladwell's famous idea — does it take 10,000 hours to master something? And if so, what should you spend those hours on? A critical watch before deciding where to go deep.",
+      duration: "10 min",
+      noteKey: "w1_10000hrs"
+    },
+    {
+      section: "Depth vs. Breadth",
+      type: "read",
+      label: "Article: Range — Why Generalists Triumph in a Specialized World (Summary)",
+      search: "David Epstein Range book summary generalists specialized world",
+      why: "David Epstein's counter to the 10,000 hour rule. He argues that sampling broadly before specializing leads to more creative, adaptive careers. Read the summary — it will genuinely surprise you.",
+      duration: "12 min read",
+      noteKey: "w1_range"
+    },
+
+    // ── SECTION: FOCUS & ACHIEVEMENT ──────────────────────
+    {
+      section: "Focus: Achieving Anything You Set Your Mind To",
+      type: "youtube",
+      label: "The Science of Focus — How to Concentrate Deeply",
+      search: "science of focus deep work concentration Cal Newport explained",
+      why: "Why is focus becoming rare — and therefore more valuable? Cal Newport's 'Deep Work' concept explains why the ability to focus without distraction is a superpower in the modern world.",
+      duration: "12 min",
+      noteKey: "w1_deepwork"
+    },
+    {
+      section: "Focus: Achieving Anything You Set Your Mind To",
+      type: "youtube",
+      label: "How to Achieve Your Most Ambitious Goals — Stephen Duneier",
+      search: "Stephen Duneier how to achieve ambitious goals TEDx marginal adjustments",
+      why: "A man who couldn't focus decided to learn German. Then he crocheted the world's largest blanket. Then he crossed the English Channel. His method is simple and you can use it today.",
+      duration: "18 min",
+      noteKey: "w1_ambitious_goals"
+    },
+    {
+      section: "Focus: Achieving Anything You Set Your Mind To",
+      type: "youtube",
+      label: "Atomic Habits — The Framework for Getting 1% Better Every Day",
+      search: "Atomic Habits James Clear summary 1 percent better every day",
+      why: "James Clear's framework: you don't rise to the level of your goals, you fall to the level of your systems. This video will change how you think about self-improvement.",
+      duration: "10 min",
+      noteKey: "w1_atomic_habits"
+    },
+    {
+      section: "Focus: Achieving Anything You Set Your Mind To",
+      type: "youtube",
+      label: "Why You Can Achieve Anything — The Growth Mindset",
+      search: "growth mindset vs fixed mindset Carol Dweck explained",
+      why: "Stanford psychologist Carol Dweck's research: people who believe their abilities can be developed (growth mindset) achieve more than those who don't. This is backed by decades of data.",
+      duration: "10 min",
+      noteKey: "w1_growth_mindset"
+    },
+    {
+      section: "Focus: Achieving Anything You Set Your Mind To",
+      type: "youtube",
+      label: "Grit: The Power of Passion and Perseverance — Angela Duckworth TED",
+      search: "Angela Duckworth grit power passion perseverance TED talk",
+      why: "What predicts success more than IQ, talent, or family income? Grit — the combination of passion and perseverance. One of the most important TED talks ever given.",
+      duration: "6 min",
+      noteKey: "w1_grit"
+    },
+    {
+      section: "Focus: Achieving Anything You Set Your Mind To",
+      type: "read",
+      label: "Article: The Myth of the Overnight Success",
+      search: "overnight success myth hard work years behind it examples",
+      why: "Every 'overnight success' was actually 10 years in the making. Read about 3-4 companies or individuals who looked like they came from nowhere — and what was actually happening behind the scenes.",
+      duration: "10 min read",
+      noteKey: "w1_overnight"
+    },
+
+    // ── SECTION: CASE STUDIES ─────────────────────────────
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "youtube",
+      label: "Dhirubhai Ambani — From Petrol Pump to ₹5 Lakh Crore Empire",
+      search: "Dhirubhai Ambani success story Reliance from scratch India",
+      why: "Started selling bhajias at a fair, worked as a petrol pump attendant, built India's most valuable company. If you watch one Indian entrepreneurship story this week, make it this one.",
+      duration: "15-20 min",
+      noteKey: "w1_dhirubhai"
+    },
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "youtube",
+      label: "Kiran Mazumdar-Shaw — Biocon: Built India's Biggest Biotech from a Garage",
+      search: "Kiran Mazumdar Shaw Biocon success story India entrepreneur",
+      why: "Rejected by every bank. Told biotech was too risky. Built a ₹80,000 crore company. A story about being told 'no' and building anyway.",
+      duration: "12-15 min",
+      noteKey: "w1_kiran"
+    },
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "youtube",
+      label: "Elon Musk — First Principles Thinking and Refusing to Accept Limits",
+      search: "Elon Musk first principles thinking success story early life",
+      why: "Before Tesla and SpaceX, Musk was bankrupt. He was sleeping on friends' couches. This is the story of HOW he thinks — not just what he built.",
+      duration: "15 min",
+      noteKey: "w1_musk"
+    },
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "youtube",
+      label: "Oprah Winfrey — Poverty, Abuse, and Building a Media Empire",
+      search: "Oprah Winfrey success story from poverty to billionaire",
+      why: "Born into poverty in rural Mississippi. Abused as a child. Fired from her first TV job. Then built a billion-dollar media empire. The story of resilience.",
+      duration: "12 min",
+      noteKey: "w1_oprah"
+    },
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "youtube",
+      label: "Narayana Murthy — How Infosys Was Built on ₹10,000",
+      search: "Narayana Murthy Infosys story started with 10000 rupees",
+      why: "Six friends. ₹10,000. A vision to prove Indian software could compete globally. Today Infosys employs 300,000+ people. A story you need to know.",
+      duration: "12-15 min",
+      noteKey: "w1_murthy"
+    },
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "youtube",
+      label: "The Airbnb Rejection Story — Turned Down by Every Investor",
+      search: "Airbnb rejection story investors brian chesky early days",
+      why: "Airbnb couldn't get any investor to take them seriously. They sold cereal boxes to survive. How they turned 'nobody believes in us' into a $75 billion company is a masterclass in persistence.",
+      duration: "10 min",
+      noteKey: "w1_airbnb"
+    },
+    {
+      section: "Case Studies: People Who Made It Big",
+      type: "read",
+      label: "Article: 10 Indian Entrepreneurs Who Started With Nothing",
+      search: "Indian entrepreneurs started with nothing rags to riches success stories",
+      why: "A curated list of Indian founders who had no advantages — no money, no connections, no elite education. Read at least 3-4 stories in full.",
+      duration: "15 min read",
+      noteKey: "w1_indian_founders"
+    },
+
+    // ── SECTION: ENTREPRENEURSHIP ──────────────────────────
+    {
+      section: "What Is Entrepreneurship, Really?",
+      type: "youtube",
+      label: "What Is Entrepreneurship? — The Real Definition",
+      search: "what is entrepreneurship really means definition explained simply",
+      why: "Not just 'starting a business.' Entrepreneurship is a mindset — seeing problems as opportunities, taking calculated risks, creating value. This video defines it properly.",
+      duration: "8 min",
+      noteKey: "w1_entrepreneurship_def"
+    },
+    {
+      section: "What Is Entrepreneurship, Really?",
+      type: "youtube",
+      label: "The Difference Between an Entrepreneur and an Employee Mindset",
+      search: "entrepreneur mindset vs employee mindset difference explained",
+      why: "This isn't about which is better — it's about understanding how each mindset thinks about risk, ownership, time, and money. Which resonates more with you?",
+      duration: "10 min",
+      noteKey: "w1_entrepreneur_vs_employee"
+    },
+    {
+      section: "What Is Entrepreneurship, Really?",
+      type: "youtube",
+      label: "Why Most Startups Fail — And What the Survivors Did Differently",
+      search: "why startups fail top reasons success factors Y Combinator",
+      why: "90% of startups fail. This isn't to scare you — it's to make you smarter about what entrepreneurship actually requires. Watch this before romanticizing it.",
+      duration: "12 min",
+      noteKey: "w1_startup_failure"
+    },
+    {
+      section: "What Is Entrepreneurship, Really?",
+      type: "youtube",
+      label: "Social Entrepreneurship — Changing the World AND Making Money",
+      search: "social entrepreneurship explained examples India impact",
+      why: "Entrepreneurship doesn't have to mean a tech startup. Social entrepreneurs solve problems in education, healthcare, environment. See what's possible beyond the typical startup narrative.",
+      duration: "10 min",
+      noteKey: "w1_social_entrepreneurship"
+    },
+    {
+      section: "What Is Entrepreneurship, Really?",
+      type: "youtube",
+      label: "Guy Kawasaki — The Art of the Start: What Entrepreneurs Must Know",
+      search: "Guy Kawasaki art of the start entrepreneur advice",
+      why: "Former Apple evangelist Guy Kawasaki distills the essential mindsets every entrepreneur needs. Practical, funny, and packed with insight.",
+      duration: "15 min",
+      noteKey: "w1_kawasaki"
+    },
+    {
+      section: "What Is Entrepreneurship, Really?",
+      type: "read",
+      label: "Article: You Don't Have to Start a Company to Be an Entrepreneur",
+      search: "intrapreneurship explained entrepreneurial mindset without starting company",
+      why: "The entrepreneurial mindset is valuable INSIDE companies too — it's called intrapreneurship. Many of the world's most impactful innovations came from employees who thought like founders.",
+      duration: "8 min read",
+      noteKey: "w1_intrapreneur"
+    },
+  ]
+},
     activities: [
       { id: "1a", title: "Flow State Mapping", time: "30 min", description: "List every activity where you lose track of time. Not what you SHOULD enjoy — what actually absorbs you.", template: { type: "list", prompt: "Activities where I lose track of time:", items: 6, placeholder: ["e.g. Drawing characters","e.g. Fixing things","e.g. Explaining concepts","e.g. Organizing playlists","e.g. Reading about science","e.g. Building in games"] } },
       { id: "1b", title: "Problem Radar", time: "20 min", description: "What problems do you naturally notice? Your 'complaint patterns' reveal what you care about fixing.", template: { type: "list", prompt: "Problems I keep noticing:", items: 5, placeholder: ["e.g. Bad app design","e.g. Poor explanations","e.g. Food waste","e.g. No public spaces","e.g. Arguments without listening"] } },

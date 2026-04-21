@@ -199,51 +199,77 @@ function DashboardTab({ students }) {
 }
 
 // ─── Tab: Student Detail ───────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Replace the StudentDetailTab function in src/app/admin/page.js
+// with this version. It shows learning notes, mentor notes,
+// activity responses, pitch notes, reflections, and uploads
+// all in one organised view per week.
+// ─────────────────────────────────────────────────────────────
+
 function StudentDetailTab({ students, onBack }) {
   const [selected, setSelected] = useState(null);
   const [detail, setDetail] = useState(null);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [expandedWeek, setExpandedWeek] = useState(null);
+  const [expandedSection, setExpandedSection] = useState({}); // per week: which sub-section
 
   const loadStudent = async (st) => {
     setSelected(st);
     setLoadingDetail(true);
     setExpandedWeek(null);
+    setExpandedSection({});
     const d = await getStudentDetail(st.uid);
     setDetail(d);
     setLoadingDetail(false);
   };
 
-  // ── Student list ──
+  const toggleSection = (weekId, section) => {
+    setExpandedSection(prev => ({
+      ...prev,
+      [`${weekId}_${section}`]: !prev[`${weekId}_${section}`]
+    }));
+  };
+  const sectionOpen = (weekId, section) => expandedSection[`${weekId}_${section}`];
+
+  // ── Student list ──────────────────────────────────────────
   if (!selected) return (
     <div className="space-y-2">
-      <p className="text-xs text-gray-400 mb-4">Click a student to see all their responses, reflections, and uploads.</p>
+      <p className="text-xs text-gray-400 mb-4">
+        Click a student to see all their notes, responses, reflections, and uploads.
+      </p>
       {students.length === 0 && (
         <div className="text-center py-12 text-gray-400 text-sm">No students enrolled yet.</div>
       )}
-      {students.map(st => {
-        const prog = calcTotalProgress(st.studentData);
-        return (
-          <button key={st.uid} onClick={() => loadStudent(st)}
-            className="flex items-center gap-3 w-full text-left p-4 bg-white rounded-xl border border-gray-100 hover:border-purple-200 hover:shadow-sm transition-all">
-            {st.photoURL
-              ? <img src={st.photoURL} alt="" className="w-10 h-10 rounded-full" />
-              : <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-600">
-                  {st.displayName?.[0] || '?'}
-                </div>}
-            <div className="flex-1 min-w-0">
-              <div className="font-semibold text-sm text-gray-800">{st.displayName}</div>
-              <div className="text-[11px] text-gray-400 truncate">{st.email}</div>
-              <div className="mt-1.5"><ProgressBar progress={prog} color="#8338EC" /></div>
-            </div>
-            <span className="text-gray-300 text-sm">→</span>
-          </button>
-        );
-      })}
+      {[...students]
+        .sort((a, b) => calcTotalProgress(b.studentData) - calcTotalProgress(a.studentData))
+        .map(st => {
+          const prog = calcTotalProgress(st.studentData);
+          return (
+            <button key={st.uid} onClick={() => loadStudent(st)}
+              className="flex items-center gap-3 w-full text-left p-4 bg-white rounded-xl border border-gray-100 hover:border-purple-200 hover:shadow-sm transition-all">
+              {st.photoURL
+                ? <img src={st.photoURL} alt="" className="w-10 h-10 rounded-full" />
+                : <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-600">
+                    {st.displayName?.[0] || '?'}
+                  </div>}
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-sm text-gray-800">{st.displayName}</div>
+                <div className="text-[11px] text-gray-400 truncate">{st.email}</div>
+                <div className="mt-1.5"><ProgressBar progress={prog} color="#8338EC" /></div>
+              </div>
+              <div className="text-right shrink-0">
+                <div className="text-lg font-extrabold" style={{ color: prog > 60 ? '#28A745' : prog > 20 ? '#F39C12' : '#9ca3af' }}>
+                  {prog}%
+                </div>
+                <div className="text-[10px] text-gray-300">→</div>
+              </div>
+            </button>
+          );
+        })}
     </div>
   );
 
-  // ── Detail view ──
+  // ── Loading ───────────────────────────────────────────────
   if (loadingDetail) return (
     <div className="flex items-center justify-center py-20 text-gray-400 text-sm">
       Loading {selected.displayName}'s data...
@@ -255,16 +281,16 @@ function StudentDetailTab({ students, onBack }) {
   const allUploads = detail?.data?.uploads || {};
   const totalProg = calcTotalProgress(detail?.data);
 
+  // ── Detail view ───────────────────────────────────────────
   return (
     <div>
-      {/* Back + header */}
-      <div className="flex items-center gap-3 mb-5">
-        <button onClick={() => { setSelected(null); setDetail(null); }}
-          className="text-xs text-gray-400 hover:text-gray-600 bg-gray-100 px-3 py-1.5 rounded-lg">
-          ← All Students
-        </button>
-      </div>
+      {/* Back */}
+      <button onClick={() => { setSelected(null); setDetail(null); }}
+        className="text-xs text-gray-400 hover:text-gray-600 bg-gray-100 px-3 py-1.5 rounded-lg mb-4">
+        ← All Students
+      </button>
 
+      {/* Student card */}
       <Card className="p-5 mb-5">
         <div className="flex items-center gap-4">
           {selected.photoURL
@@ -274,35 +300,36 @@ function StudentDetailTab({ students, onBack }) {
               </div>}
           <div className="flex-1">
             <div className="text-xl font-extrabold text-gray-800">{selected.displayName}</div>
-            <div className="text-xs text-gray-400">{selected.email}</div>
-            <div className="mt-2 max-w-xs"><ProgressBar progress={totalProg} color="#8338EC" height={8} /></div>
+            <div className="text-xs text-gray-400 mb-2">{selected.email}</div>
+            <ProgressBar progress={totalProg} color="#8338EC" height={8} />
           </div>
           <div className="text-right">
             <div className="text-3xl font-extrabold text-purple-600">{totalProg}%</div>
-            <div className="text-[11px] text-gray-400">Overall complete</div>
+            <div className="text-[11px] text-gray-400">complete</div>
           </div>
         </div>
 
-        {/* Step badges */}
+        {/* Week badges */}
         <div className="mt-4 flex flex-wrap gap-1.5">
           {WEEKS.map(w => {
             const prog = calcWeekProgress(w, detail?.data);
             return (
               <div key={w.id} title={`Week ${w.id}: ${w.title}`}
-                className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold border"
+                className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold border cursor-pointer"
                 style={{
                   background: prog === 100 ? '#F0FFF4' : prog > 0 ? `${w.color}11` : '#f9fafb',
                   borderColor: prog === 100 ? '#28A745' : prog > 0 ? w.color : '#e5e7eb',
                   color: prog === 100 ? '#28A745' : prog > 0 ? w.color : '#9ca3af',
-                }}>
-                {w.icon} W{w.id} {prog}%
+                }}
+                onClick={() => setExpandedWeek(expandedWeek === w.id ? null : w.id)}>
+                {w.icon} W{w.id} {prog > 0 ? `${prog}%` : '—'}
               </div>
             );
           })}
         </div>
       </Card>
 
-      {/* Week-by-week responses */}
+      {/* Week-by-week detail */}
       <div className="space-y-2">
         {WEEKS.map(w => {
           const weekProg = calcWeekProgress(w, detail?.data);
@@ -310,122 +337,230 @@ function StudentDetailTab({ students, onBack }) {
           const weekUploads = allUploads[`week_${w.id}`] || [];
           const isOpen = expandedWeek === w.id;
           const phase = PHASE_COLORS[w.phase];
-          const hasContent = weekProg > 0 || weekUploads.length > 0;
+
+          // Count learning notes for this week
+          const learningNoteKeys = Object.keys(responses).filter(k =>
+            k.startsWith(`learn_note_${w.id}_`) && responses[k]?.text?.trim()
+          );
+          const mentorNote = responses[`mentor_note_${w.id}`]?.text?.trim();
+          const pitchNote = responses[`pitch_${w.id}`]?.text?.trim();
+          const pitchFeedback = responses[`pitch_feedback_${w.id}`]?.text?.trim();
+          const reflection = responses[`reflection_${w.id}`]?.text?.trim();
+
+          // Activity responses
+          const activityResponses = w.activities.map(act => {
+            const r = responses[act.id] || {};
+            const entries = Object.entries(r).filter(([_, v]) => typeof v === 'string' && v.trim().length > 0);
+            return { act, entries };
+          }).filter(({ entries }) => entries.length > 0);
+
+          const hasAny = weekProg > 0 || weekUploads.length > 0 || learningNoteKeys.length > 0;
 
           return (
             <Card key={w.id} className="overflow-hidden">
+              {/* Week row */}
               <button onClick={() => setExpandedWeek(isOpen ? null : w.id)}
                 className={`flex items-center gap-3 w-full text-left px-4 py-3 transition-colors ${isOpen ? 'bg-gray-50' : 'hover:bg-gray-50/50'}`}>
-                <span className="text-lg">{w.icon}</span>
+                <span className="text-lg shrink-0">{w.icon}</span>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: phase.accent }}>
                       Week {w.id}
                     </span>
-                    {!hasContent && <Badge label="Not started" color="#9ca3af" bg="#f3f4f6" />}
-                    {weekUploads.length > 0 && <Badge label={`${weekUploads.length} upload${weekUploads.length > 1 ? 's' : ''}`} color="#2D7DD2" bg="#EEF6FF" />}
+                    {learningNoteKeys.length > 0 && (
+                      <Badge label={`✏️ ${learningNoteKeys.length} notes`} color="#2D7DD2" bg="#EEF6FF" />
+                    )}
+                    {weekUploads.length > 0 && (
+                      <Badge label={`📎 ${weekUploads.length} file${weekUploads.length > 1 ? 's' : ''}`} color="#1B998B" bg="#E8FFF9" />
+                    )}
+                    {reflection && <Badge label="📝 reflected" color="#8338EC" bg="#F3EEFF" />}
+                    {!hasAny && <Badge label="Not started" color="#9ca3af" bg="#f3f4f6" />}
                   </div>
-                  <div className="text-sm font-semibold text-gray-700">{w.title}</div>
+                  <div className="text-sm font-semibold text-gray-700 truncate">{w.title}</div>
                 </div>
                 <div className="w-28 shrink-0"><ProgressBar progress={weekProg} color={w.color} /></div>
-                <span className={`text-sm text-gray-300 transition-transform shrink-0 ${isOpen ? 'rotate-180' : ''}`}>⌄</span>
+                <span className={`text-sm text-gray-300 transition-transform shrink-0 ml-1 ${isOpen ? 'rotate-180' : ''}`}>⌄</span>
               </button>
 
+              {/* Expanded week detail */}
               {isOpen && (
-                <div className="px-4 pb-4 border-t border-gray-50 space-y-4 pt-3">
+                <div className="border-t border-gray-50 divide-y divide-gray-50">
 
                   {/* Checklist */}
-                  <div>
-                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wide mb-2">Checklist</div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {steps.map(s => {
-                        const done = completedSteps[s.key];
-                        return (
-                          <span key={s.key} className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg font-medium ${done ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}>
-                            {done ? '✓' : '○'} {s.icon} {s.label}
-                          </span>
-                        );
-                      })}
-                    </div>
+                  <div className="px-4 py-3">
+                    <button onClick={() => toggleSection(w.id, 'checklist')}
+                      className="flex items-center justify-between w-full text-left">
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">✅ Checklist</span>
+                      <span className="text-xs text-gray-300">{sectionOpen(w.id, 'checklist') ? '▲' : '▼'}</span>
+                    </button>
+                    {sectionOpen(w.id, 'checklist') && (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {steps.map(s => {
+                          const done = completedSteps[s.key];
+                          return (
+                            <span key={s.key}
+                              className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg font-medium border ${done ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-400 border-gray-100'}`}>
+                              {done ? '✓' : '○'} {s.icon} {s.label}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Uploads */}
-                  {weekUploads.length > 0 && (
-                    <div>
-                      <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wide mb-2">📎 Uploaded Presentations</div>
-                      <div className="space-y-1">
-                        {weekUploads.map((f, i) => (
-                          <a key={i} href={f.url} target="_blank" rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
-                            <span className="text-base">📄</span>
-                            <span className="flex-1 text-xs text-blue-700 font-medium truncate">{f.name}</span>
-                            <span className="text-[10px] text-gray-400 shrink-0">
-                              {new Date(f.uploadedAt).toLocaleDateString('en-IN')}
-                            </span>
-                            <span className="text-[10px] text-blue-500">↗</span>
-                          </a>
-                        ))}
-                      </div>
+                  {/* Learning Notes */}
+                  {learningNoteKeys.length > 0 && (
+                    <div className="px-4 py-3">
+                      <button onClick={() => toggleSection(w.id, 'notes')}
+                        className="flex items-center justify-between w-full text-left">
+                        <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wide">
+                          ✏️ Learning Notes ({learningNoteKeys.length})
+                        </span>
+                        <span className="text-xs text-gray-300">{sectionOpen(w.id, 'notes') ? '▲' : '▼'}</span>
+                      </button>
+                      {sectionOpen(w.id, 'notes') && (
+                        <div className="mt-2 space-y-2">
+                          {/* Match notes to learning items */}
+                          {(w.learning.items || []).map((item, idx) => {
+                            const noteKey = `learn_note_${w.id}_${item.noteKey || idx}`;
+                            const noteText = responses[noteKey]?.text?.trim();
+                            if (!noteText) return null;
+                            return (
+                              <div key={noteKey} className="p-2.5 bg-blue-50 rounded-lg border border-blue-100">
+                                <div className="text-[10px] font-bold text-blue-500 mb-1 flex items-center gap-1">
+                                  {item.type === 'youtube' ? '▶' : '📖'} {item.label}
+                                </div>
+                                <div className="text-xs text-gray-700 leading-relaxed whitespace-pre-wrap">{noteText}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Mentor session notes */}
+                  {mentorNote && (
+                    <div className="px-4 py-3">
+                      <button onClick={() => toggleSection(w.id, 'mentor')}
+                        className="flex items-center justify-between w-full text-left">
+                        <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wide">
+                          🧠 Mentor Session Notes
+                        </span>
+                        <span className="text-xs text-gray-300">{sectionOpen(w.id, 'mentor') ? '▲' : '▼'}</span>
+                      </button>
+                      {sectionOpen(w.id, 'mentor') && (
+                        <div className="mt-2 p-2.5 bg-purple-50 rounded-lg border border-purple-100">
+                          <div className="text-xs text-gray-700 leading-relaxed whitespace-pre-wrap">{mentorNote}</div>
+                        </div>
+                      )}
                     </div>
                   )}
 
                   {/* Activity responses */}
-                  {w.activities.map(act => {
-                    const r = responses[act.id] || {};
-                    const entries = Object.entries(r).filter(([_, v]) => typeof v === 'string' && v.trim().length > 0);
-                    return (
-                      <div key={act.id}>
-                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wide mb-1.5">
-                          ✏️ {act.title}
-                        </div>
-                        {entries.length === 0
-                          ? <div className="text-[11px] text-gray-300 italic pl-2">Not filled in yet.</div>
-                          : (
-                            <div className="space-y-1.5 pl-2">
-                              {entries.map(([k, v]) => (
-                                <div key={k} className="p-2.5 bg-gray-50 rounded-lg border-l-2 border-gray-200">
-                                  <div className="text-[10px] text-gray-400 font-bold uppercase mb-0.5">{k.replace(/_/g, ' ')}</div>
-                                  <div className="text-xs text-gray-700 leading-relaxed whitespace-pre-wrap">{v}</div>
-                                </div>
-                              ))}
+                  {activityResponses.length > 0 && (
+                    <div className="px-4 py-3">
+                      <button onClick={() => toggleSection(w.id, 'activities')}
+                        className="flex items-center justify-between w-full text-left">
+                        <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wide">
+                          ✏️ Activity Responses ({activityResponses.length} filled)
+                        </span>
+                        <span className="text-xs text-gray-300">{sectionOpen(w.id, 'activities') ? '▲' : '▼'}</span>
+                      </button>
+                      {sectionOpen(w.id, 'activities') && (
+                        <div className="mt-2 space-y-3">
+                          {activityResponses.map(({ act, entries }) => (
+                            <div key={act.id} className="p-2.5 bg-orange-50 rounded-lg border border-orange-100">
+                              <div className="text-xs font-bold text-orange-600 mb-2">📝 {act.title}</div>
+                              <div className="space-y-1.5">
+                                {entries.map(([k, v]) => (
+                                  <div key={k} className="pl-2 border-l-2 border-orange-200">
+                                    <div className="text-[9px] text-gray-400 font-bold uppercase">{k.replace(/_/g, ' ')}</div>
+                                    <div className="text-xs text-gray-700 whitespace-pre-wrap">{v}</div>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                          )}
-                      </div>
-                    );
-                  })}
-
-                  {/* Pitch notes */}
-                  {responses[`pitch_${w.id}`]?.text && (
-                    <div>
-                      <div className="text-[10px] font-bold text-red-400 uppercase tracking-wide mb-1.5">🎤 Pitch Notes</div>
-                      <div className="p-2.5 bg-red-50 rounded-lg border-l-2 border-red-200 text-xs text-gray-700 whitespace-pre-wrap">
-                        {responses[`pitch_${w.id}`].text}
-                      </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )}
 
-                  {responses[`pitch_feedback_${w.id}`]?.text && (
-                    <div>
-                      <div className="text-[10px] font-bold text-orange-400 uppercase tracking-wide mb-1.5">💬 Mentor Feedback Given</div>
-                      <div className="p-2.5 bg-orange-50 rounded-lg border-l-2 border-orange-200 text-xs text-gray-700 whitespace-pre-wrap">
-                        {responses[`pitch_feedback_${w.id}`].text}
-                      </div>
+                  {/* Pitch */}
+                  {(pitchNote || pitchFeedback) && (
+                    <div className="px-4 py-3">
+                      <button onClick={() => toggleSection(w.id, 'pitch')}
+                        className="flex items-center justify-between w-full text-left">
+                        <span className="text-[10px] font-bold text-red-400 uppercase tracking-wide">🎤 Pitch Back</span>
+                        <span className="text-xs text-gray-300">{sectionOpen(w.id, 'pitch') ? '▲' : '▼'}</span>
+                      </button>
+                      {sectionOpen(w.id, 'pitch') && (
+                        <div className="mt-2 space-y-2">
+                          {pitchNote && (
+                            <div className="p-2.5 bg-red-50 rounded-lg border border-red-100">
+                              <div className="text-[10px] font-bold text-red-500 mb-1">Student's Pitch Notes</div>
+                              <div className="text-xs text-gray-700 whitespace-pre-wrap">{pitchNote}</div>
+                            </div>
+                          )}
+                          {pitchFeedback && (
+                            <div className="p-2.5 bg-orange-50 rounded-lg border border-orange-100">
+                              <div className="text-[10px] font-bold text-orange-500 mb-1">Mentor Feedback Given</div>
+                              <div className="text-xs text-gray-700 whitespace-pre-wrap">{pitchFeedback}</div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
 
                   {/* Reflection */}
-                  {responses[`reflection_${w.id}`]?.text && (
-                    <div>
-                      <div className="text-[10px] font-bold text-purple-400 uppercase tracking-wide mb-1.5">📝 Weekly Reflection</div>
-                      <div className="p-2.5 bg-purple-50 rounded-lg border-l-2 border-purple-200 text-xs text-gray-700 whitespace-pre-wrap">
-                        {responses[`reflection_${w.id}`].text}
-                      </div>
+                  {reflection && (
+                    <div className="px-4 py-3">
+                      <button onClick={() => toggleSection(w.id, 'reflection')}
+                        className="flex items-center justify-between w-full text-left">
+                        <span className="text-[10px] font-bold text-purple-500 uppercase tracking-wide">📝 Reflection</span>
+                        <span className="text-xs text-gray-300">{sectionOpen(w.id, 'reflection') ? '▲' : '▼'}</span>
+                      </button>
+                      {sectionOpen(w.id, 'reflection') && (
+                        <div className="mt-2 p-2.5 bg-purple-50 rounded-lg border border-purple-100">
+                          <div className="text-xs text-gray-700 leading-relaxed whitespace-pre-wrap">{reflection}</div>
+                        </div>
+                      )}
                     </div>
                   )}
 
-                  {!hasContent && (
-                    <div className="text-center py-4 text-xs text-gray-300 italic">
-                      This student hasn't started Week {w.id} yet.
+                  {/* Uploads */}
+                  {weekUploads.length > 0 && (
+                    <div className="px-4 py-3">
+                      <button onClick={() => toggleSection(w.id, 'uploads')}
+                        className="flex items-center justify-between w-full text-left">
+                        <span className="text-[10px] font-bold text-teal-500 uppercase tracking-wide">
+                          📎 Uploads ({weekUploads.length})
+                        </span>
+                        <span className="text-xs text-gray-300">{sectionOpen(w.id, 'uploads') ? '▲' : '▼'}</span>
+                      </button>
+                      {sectionOpen(w.id, 'uploads') && (
+                        <div className="mt-2 space-y-1.5">
+                          {weekUploads.map((f, i) => (
+                            <a key={i} href={f.url} target="_blank" rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-3 py-2 bg-teal-50 rounded-lg hover:bg-teal-100 transition border border-teal-100">
+                              <span>📄</span>
+                              <span className="flex-1 text-xs text-teal-700 font-medium truncate">{f.name}</span>
+                              <span className="text-[10px] text-gray-400">
+                                {new Date(f.uploadedAt).toLocaleDateString('en-IN')}
+                              </span>
+                              <span className="text-[10px] text-teal-500">↗</span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {!hasAny && (
+                    <div className="px-4 py-6 text-center text-xs text-gray-300 italic">
+                      {selected.displayName} hasn't started Week {w.id} yet.
                     </div>
                   )}
                 </div>
