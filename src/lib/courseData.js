@@ -441,8 +441,514 @@ learning: {
     pitchBack: { title: "Week 7 Pitch-Back (10 min)", instructions: "Present like finance pro:", points: ["4-career comparison walkthrough","Deep-dive on chosen career","Startup pitch + fundraising","How money flows (from CP)"], format: "Most data-heavy yet. Use table. Specific numbers." },
     reflection: "Finance more or less interesting? What surprised you?"
   },
+  // ═══════════════════════════════════════════════════════════════════
+//  STOCK MARKETS & EQUITY — Full Week
+//  INSERT this object into the WEEKS array in courseData.js
+//  Recommended position: after Week 7 (Finance Careers), before Week 8 (Tech & AI)
+//  This makes it the new Week 8, and shift existing weeks 8+ by 1
+//  OR add as Week 16 at the end if you want to keep numbering intact
+// ═══════════════════════════════════════════════════════════════════
+
+{
+  id: 8, phase: 2, phaseTitle: "What's Actually Out There?",
+  title: "Stock Markets & Equity", 
+  subtitle: "How ownership, money, and markets actually work",
+  gain: "You'll understand what a stock is, how markets work, how to read key financial metrics, and how to evaluate any publicly traded company — skills most adults never learn.",
+  color: "#C0392B", icon: "📈",
+
+  mentor: {
+    key: "cp",
+    topic: "How I Think About Equity, Valuations, and What Makes a Good Investment",
+    agenda: "CP will walk you through how a professional actually evaluates a company before investing. He'll bring real examples — companies you know — and show you how to read a P&L and balance sheet through an investor's eyes. He'll explain the difference between how retail investors think vs. how smart money thinks. Bring your Stock Evaluation from Activity 8c.",
+    prepQuestion: "Before the session, pick ONE company whose stock is listed on NSE or BSE that you find interesting (Zomato, Tata Motors, Infosys, anything). Write down: What do you think this company is worth and why? Just your gut feeling — we'll compare it to the real numbers."
+  },
+
+  learning: {
+    title: "Watch, Read & Take Notes — Full Week (8-10 hrs)",
+    items: [
+
+      // ── SECTION 1: WHAT IS A STOCK? ──────────────────────────────
+      {
+        section: "What Is a Stock? The Ownership Concept",
+        type: "youtube",
+        label: "What Is a Stock? — Explained Simply for Beginners",
+        search: "what is a stock share explained simply beginners",
+        why: "The absolute foundation. A share = a piece of ownership in a real company. This video makes the concept visceral and clear before anything else.",
+        duration: "8 min",
+        noteKey: "stock_what_is"
+      },
+      {
+        section: "What Is a Stock? The Ownership Concept",
+        type: "youtube",
+        label: "Why Do Companies Issue Shares? The IPO Explained",
+        search: "why do companies issue shares IPO explained simply India",
+        why: "Companies don't give away ownership for fun — they do it to raise money. Understanding WHY shares exist makes every other concept click.",
+        duration: "10 min",
+        noteKey: "stock_why_shares"
+      },
+      {
+        section: "What Is a Stock? The Ownership Concept",
+        type: "youtube",
+        label: "How an IPO Works — From Private to Public Company",
+        search: "how IPO works explained step by step India NSE BSE listing",
+        why: "The moment a private company becomes public — one of the most important events in business. See exactly how it happens, who makes money, and why it matters.",
+        duration: "12 min",
+        noteKey: "stock_ipo"
+      },
+      {
+        section: "What Is a Stock? The Ownership Concept",
+        type: "youtube",
+        label: "What Are Dividends and How Do You Make Money from Stocks?",
+        search: "how do you make money from stocks dividends capital appreciation explained",
+        why: "Two ways to make money from owning shares: dividends (company pays you) and capital appreciation (price goes up). Know the difference.",
+        duration: "8 min",
+        noteKey: "stock_dividends"
+      },
+      {
+        section: "What Is a Stock? The Ownership Concept",
+        type: "read",
+        label: "Article: BSE and NSE — India's Two Stock Exchanges Explained",
+        search: "BSE NSE difference India stock exchange explained Bombay National",
+        why: "India has two main exchanges. Know what they are, how they differ, what SENSEX and NIFTY 50 actually measure, and why these numbers are reported on the news every day.",
+        duration: "10 min read",
+        noteKey: "stock_bse_nse"
+      },
+
+      // ── SECTION 2: HOW STOCK MARKETS WORK ────────────────────────
+      {
+        section: "How Stock Markets Actually Work",
+        type: "youtube",
+        label: "How the Stock Market Works — The Full Mechanism",
+        search: "how stock market works explained buyers sellers price discovery India",
+        why: "Who sets the price of a stock? How does buying and selling actually happen? Why do prices move minute by minute? This demystifies the whole system.",
+        duration: "12 min",
+        noteKey: "market_mechanism"
+      },
+      {
+        section: "How Stock Markets Actually Work",
+        type: "youtube",
+        label: "Bull Markets vs Bear Markets — What They Mean and Why They Happen",
+        search: "bull market vs bear market explained causes India examples",
+        why: "You'll hear these terms constantly. A bull market = prices rising. Bear = prices falling. But WHY do they happen? The psychology and economics behind market cycles.",
+        duration: "10 min",
+        noteKey: "market_bull_bear"
+      },
+      {
+        section: "How Stock Markets Actually Work",
+        type: "youtube",
+        label: "Market Crashes — What Causes Them and What Happens After",
+        search: "stock market crash history causes 2008 2020 India what happens after",
+        why: "Every market has crashed multiple times. 1929, 2000, 2008, 2020. What caused each one? What happened to investors who stayed in vs. panic-sold? The answer will surprise you.",
+        duration: "15 min",
+        noteKey: "market_crashes"
+      },
+      {
+        section: "How Stock Markets Actually Work",
+        type: "youtube",
+        label: "How SENSEX and NIFTY 50 Are Calculated",
+        search: "how SENSEX NIFTY 50 calculated index explained India",
+        why: "When the news says 'SENSEX fell 500 points today' — what does that actually mean? How are these indices constructed, and why do they matter?",
+        duration: "8 min",
+        noteKey: "market_sensex_nifty"
+      },
+      {
+        section: "How Stock Markets Actually Work",
+        type: "youtube",
+        label: "Who Actually Moves Markets? FIIs, DIIs, Retail Investors Explained",
+        search: "FII DII retail investor India stock market who moves markets explained",
+        why: "Foreign Institutional Investors (FIIs) can move entire markets by themselves. Understanding who the major players are — and how they think differently — is essential market literacy.",
+        duration: "10 min",
+        noteKey: "market_players"
+      },
+
+      // ── SECTION 3: EQUITY VS DEBT ─────────────────────────────────
+      {
+        section: "Equity vs. Debt — The Fundamental Difference",
+        type: "youtube",
+        label: "Equity vs Debt — What's the Difference? Explained Simply",
+        search: "equity vs debt difference explained simply finance ownership lending",
+        why: "The most fundamental distinction in all of finance. Equity = ownership with risk and upside. Debt = lending with fixed return and priority. Everything in finance flows from this.",
+        duration: "10 min",
+        noteKey: "equity_vs_debt"
+      },
+      {
+        section: "Equity vs. Debt — The Fundamental Difference",
+        type: "youtube",
+        label: "What Are Bonds and How Do They Work?",
+        search: "what are bonds how do they work explained simply India government corporate",
+        why: "Bonds = debt instruments. When you buy a government bond, you're lending money to the government. This is the 'safe' alternative to stocks — but is it really safer?",
+        duration: "10 min",
+        noteKey: "bonds_explained"
+      },
+      {
+        section: "Equity vs. Debt — The Fundamental Difference",
+        type: "youtube",
+        label: "Preference Shares vs Ordinary Shares — What's the Difference?",
+        search: "preference shares vs ordinary shares difference explained India",
+        why: "Not all shareholders are equal. Preference shareholders get paid first but have no voting rights. Understanding the capital structure of a company matters when evaluating it.",
+        duration: "8 min",
+        noteKey: "equity_pref_vs_ordinary"
+      },
+      {
+        section: "Equity vs. Debt — The Fundamental Difference",
+        type: "youtube",
+        label: "Debt-to-Equity Ratio — How Much Debt Is Too Much?",
+        search: "debt to equity ratio explained too much debt company analysis",
+        why: "Companies borrow money to grow. But how much debt is dangerous? The D/E ratio tells you how leveraged a company is. You'll use this in your stock evaluation.",
+        duration: "8 min",
+        noteKey: "equity_debt_ratio"
+      },
+      {
+        section: "Equity vs. Debt — The Fundamental Difference",
+        type: "read",
+        label: "Article: Why Equity Is More Valuable Than Debt (For Investors)",
+        search: "why equity investing better than debt long term wealth creation India historical returns",
+        why: "Over any 20-year period in Indian market history, equity has outperformed debt. But it's not without pain. Read the data on long-term equity returns vs. FD/bond returns.",
+        duration: "10 min read",
+        noteKey: "equity_vs_debt_returns"
+      },
+
+      // ── SECTION 4: KEY METRICS ────────────────────────────────────
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "P/E Ratio (Price-to-Earnings) — The Most Important Metric",
+        search: "PE ratio explained simply how to use price to earnings stock valuation India",
+        why: "The P/E ratio is the single most-used valuation metric in investing. It answers: 'How much am I paying for ₹1 of this company's earnings?' A high P/E = expensive. A low P/E = cheap. But it's more nuanced than that.",
+        duration: "12 min",
+        noteKey: "metric_pe"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "Market Capitalisation — What It Is and Why It Matters",
+        search: "market capitalisation explained simply large cap mid cap small cap India",
+        why: "Market cap = share price × total shares. It tells you the market's opinion of what the entire company is worth. Large cap, mid cap, small cap — these categories determine risk and return profiles.",
+        duration: "8 min",
+        noteKey: "metric_market_cap"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "EPS (Earnings Per Share) — What It Means and Why It Moves Prices",
+        search: "EPS earnings per share explained stock market India how to calculate",
+        why: "EPS tells you how much profit a company makes per share. When a company beats its expected EPS, the stock usually jumps. When it misses, it falls. This is why quarterly results matter.",
+        duration: "8 min",
+        noteKey: "metric_eps"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "ROE and ROCE — The Best Measure of Management Quality",
+        search: "ROE ROCE return on equity capital employed explained India stock analysis",
+        why: "ROE = how efficiently a company uses shareholders' money to generate profit. ROCE = same but including debt. A company with consistently high ROE (20%+) is usually run by excellent management.",
+        duration: "10 min",
+        noteKey: "metric_roe_roce"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "P/B Ratio (Price-to-Book) — Buying ₹1 of Assets for Less",
+        search: "price to book ratio explained PB ratio stock valuation India",
+        why: "Book value = what the company is theoretically worth if it sold all its assets and paid all debts. P/B ratio tells you: are you buying ₹1 of assets for 50 paise or ₹5? Used heavily in banking stocks.",
+        duration: "8 min",
+        noteKey: "metric_pb"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "Revenue Growth, Profit Margins, and Free Cash Flow — The Trinity",
+        search: "revenue growth profit margins free cash flow explained stock analysis India",
+        why: "Revenue is how much a company earns. Margin is what's left after costs. Free Cash Flow is actual cash generated — this is the hardest to fake and the most important. Learn all three.",
+        duration: "12 min",
+        noteKey: "metric_revenue_margins_fcf"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "Dividend Yield — Getting Paid to Own Shares",
+        search: "dividend yield explained how to calculate India which companies pay dividends",
+        why: "Some companies share profits with shareholders regularly. Dividend yield tells you what % annual return you get just from dividends. Key for income investors and retirees.",
+        duration: "8 min",
+        noteKey: "metric_dividend_yield"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "youtube",
+        label: "How to Read a Stock Chart — Candlesticks, Support, Resistance",
+        search: "how to read stock chart candlestick chart support resistance India beginners",
+        why: "Before you can analyze a stock, you need to read its chart. Candlestick charts, support and resistance levels, trends — this is the visual language of markets.",
+        duration: "15 min",
+        noteKey: "chart_reading"
+      },
+      {
+        section: "The Metrics That Matter — How to Evaluate Any Stock",
+        type: "read",
+        label: "Tool: Screener.in — How to Use India's Best Free Stock Research Platform",
+        search: "screener.in how to use stock research India tutorial beginners",
+        why: "Screener.in is the best free tool for researching Indian stocks. You can see all key metrics, historical financials, growth trends, and peer comparisons in one place. You'll use this for Activity 8c.",
+        duration: "15 min",
+        noteKey: "tool_screener"
+      },
+
+      // ── SECTION 5: INVESTING PHILOSOPHIES ────────────────────────
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "Warren Buffett — Value Investing Explained Simply",
+        search: "Warren Buffett value investing explained simply buy hold long term",
+        why: "Buy wonderful companies at fair prices and hold them forever. Buffett's philosophy in one sentence. But understanding WHY it works requires understanding intrinsic value, moats, and patience.",
+        duration: "15 min",
+        noteKey: "invest_buffett"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "What Is a Moat? Why Some Companies Stay Dominant Forever",
+        search: "economic moat explained competitive advantage Warren Buffett stocks India",
+        why: "Buffett only buys companies with a 'moat' — a durable competitive advantage that prevents competitors from eating their profits. Think: what stops someone from copying Zomato? HDFC Bank? Asian Paints?",
+        duration: "10 min",
+        noteKey: "invest_moat"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "Index Funds vs Individual Stocks — What Even Experts Get Wrong",
+        search: "index funds vs individual stocks which is better India Nifty 50 index investing",
+        why: "Most professional fund managers fail to beat the index over 10 years. This video explains why index funds — simply buying all 50 NIFTY stocks — outperform most active strategies over time.",
+        duration: "12 min",
+        noteKey: "invest_index_vs_stock"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "Mutual Funds and SIPs — The Smartest Way to Start Investing in India",
+        search: "mutual funds SIP explained India beginners how to start investing",
+        why: "A Systematic Investment Plan (SIP) lets you invest ₹500/month into a diversified fund. This is how most Indians should start. Understand the mechanics, types of funds, and expense ratios.",
+        duration: "12 min",
+        noteKey: "invest_mutual_funds_sip"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "The Power of Compounding in the Stock Market — Why Time Is Everything",
+        search: "power of compounding stock market India long term wealth creation examples",
+        why: "₹10,000 invested in Infosys at its IPO in 1993 is worth over ₹3 crore today. Time in the market beats timing the market. This video shows the math with Indian examples.",
+        duration: "10 min",
+        noteKey: "invest_compounding"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "Rakesh Jhunjhunwala — India's Warren Buffett and His Investing Philosophy",
+        search: "Rakesh Jhunjhunwala investing philosophy India big bull stocks",
+        why: "India's most celebrated stock market investor. How he built ₹40,000 crore from a few thousand rupees. His specific thought process on picking stocks, holding conviction, and thinking long-term.",
+        duration: "15 min",
+        noteKey: "invest_rj"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "youtube",
+        label: "Common Mistakes Every Beginner Makes in the Stock Market",
+        search: "common stock market mistakes beginners India emotional investing tips",
+        why: "Buy high sell low. Panic during corrections. Follow tips. Ignore fundamentals. These mistakes cost crores. Watch this before ever putting real money in the market.",
+        duration: "12 min",
+        noteKey: "invest_mistakes"
+      },
+      {
+        section: "How Smart Investors Actually Think",
+        type: "read",
+        label: "Article: The 10 Most Important Rules of Investing — Morgan Housel",
+        search: "Morgan Housel psychology of money key lessons rules of investing",
+        why: "Morgan Housel's 'The Psychology of Money' is the most important personal finance book of the decade. Read this summary of its key ideas — especially why behaviour matters more than knowledge in investing.",
+        duration: "15 min read",
+        noteKey: "invest_psychology"
+      },
+
+      // ── SECTION 6: REAL WORLD APPLICATION ────────────────────────
+      {
+        section: "Putting It All Together",
+        type: "youtube",
+        label: "How to Research a Stock From Scratch — Full Walkthrough",
+        search: "how to research a stock from scratch India full analysis screener zerodha",
+        why: "A professional analyst shows exactly how they pick a stock to evaluate — what they look at first, what metrics matter, what red flags to avoid. Watch this before Activity 8c.",
+        duration: "20 min",
+        noteKey: "apply_research"
+      },
+      {
+        section: "Putting It All Together",
+        type: "youtube",
+        label: "Zerodha Varsity — Best Free Stock Market Education in India",
+        search: "Zerodha Varsity stock market course India free education modules",
+        why: "Zerodha built the most comprehensive free stock market education in India. varsity.zerodha.com covers everything from basics to options. Bookmark this — it's what you study after this week.",
+        duration: "10 min (overview)",
+        noteKey: "apply_zerodha_varsity"
+      },
+      {
+        section: "Putting It All Together",
+        type: "read",
+        label: "Article: How to Start Investing in India — Step-by-Step for a 17-Year-Old",
+        search: "how to start investing India teenager minor demat account steps",
+        why: "You can open a demat account with a guardian as a minor. This article walks through the exact steps — which broker to use, what documents you need, how much to start with.",
+        duration: "10 min read",
+        noteKey: "apply_start_investing"
+      },
+    ]
+  },
+
+  activities: [
+    {
+      id: "eq_a", title: "The Concept Check — 10 Things You Now Know", time: "20 min",
+      description: "Before doing any research, write down — in your own words, as simply as possible — your understanding of each concept below. Use the Feynman technique: if a 12-year-old couldn't understand your explanation, simplify it. This exercise reveals what you actually understood vs. what you just heard.",
+      template: {
+        type: "list",
+        prompt: "Explain each concept in 1-2 sentences of plain English:",
+        items: 10,
+        placeholder: [
+          "What is a share? (in one sentence, what am I actually owning?)",
+          "Why does a share price go up or down?",
+          "What is the difference between equity and debt?",
+          "What does a P/E ratio tell me?",
+          "What is market capitalisation and why does it matter?",
+          "What is ROE and what does a high ROE tell me about a company?",
+          "What is a bull market vs a bear market?",
+          "What is an index fund and why do most fund managers fail to beat it?",
+          "What is a dividend and how does it work?",
+          "What does 'intrinsic value' mean — and why does Buffett care about it?"
+        ]
+      }
+    },
+    {
+      id: "eq_b", title: "Build the Metrics Cheat Sheet", time: "30 min",
+      description: "Every serious investor has a mental checklist of metrics they run through when evaluating a stock. Build yours. For each metric, write: what it measures, how it's calculated, and what 'good' looks like. You'll use this in Activity 8c.",
+      template: {
+        type: "comparison",
+        columns: ["What it measures", "How calculated", "What 'good' looks like"],
+        rows: [
+          "P/E Ratio",
+          "P/B Ratio",
+          "EPS (Earnings Per Share)",
+          "Market Capitalisation",
+          "ROE (Return on Equity)",
+          "ROCE (Return on Capital Employed)",
+          "Debt-to-Equity Ratio",
+          "Revenue Growth (YoY %)",
+          "Net Profit Margin",
+          "Free Cash Flow",
+          "Dividend Yield",
+          "52-Week High/Low"
+        ]
+      }
+    },
+    {
+      id: "eq_c", title: "Evaluate a Real Company — Full Stock Analysis", time: "90 min",
+      description: "Go to screener.in and search for ANY company whose stock is listed in India. Pick something you find interesting — a brand you use, a company CP mentioned, or one from the case studies. Fill in every field below using REAL data. This is what a real analyst does.",
+      template: {
+        type: "pitch",
+        fields: [
+          { label: "Company name and ticker symbol (e.g. Zomato / ZOMATO)", placeholder: "" },
+          { label: "What does this company actually DO? (explain the business simply)", placeholder: "They make money by..." },
+          { label: "Revenue last year and revenue 3 years ago — is it growing?", placeholder: "Last year: ₹___ | 3 years ago: ₹___ | Growth rate: __%" },
+          { label: "Is the company profitable? Net profit and net profit margin?", placeholder: "Net profit: ₹___ | Margin: __%" },
+          { label: "P/E Ratio — and is it high or low for this industry?", placeholder: "P/E: ___ | Industry avg: ___ | My read:" },
+          { label: "Market Cap — Large, Mid, or Small cap?", placeholder: "Market cap: ₹___ | Category:" },
+          { label: "ROE and Debt-to-Equity Ratio", placeholder: "ROE: __% | D/E: ___ | What this tells me:" },
+          { label: "What is their competitive MOAT? Why can't someone easily copy them?", placeholder: "Their unfair advantage is..." },
+          { label: "What are the biggest RISKS to this company?", placeholder: "The main risks are..." },
+          { label: "Based on all this, do you think this stock is OVERVALUED, FAIRLY VALUED, or UNDERVALUED? Why?", placeholder: "I think it is ___ because..." },
+          { label: "Would you buy this stock with ₹10,000 of your money today? Why or why not?", placeholder: "Yes/No because..." }
+        ]
+      }
+    },
+    {
+      id: "eq_d", title: "Compare Two Competitors — Head to Head", time: "45 min",
+      description: "Pick two companies in the SAME industry (e.g. HDFC Bank vs ICICI Bank, Zomato vs Swiggy if listed, Infosys vs TCS, Asian Paints vs Berger). Compare them head to head on every metric. This is how fund managers decide which horse to back.",
+      template: {
+        type: "comparison",
+        columns: ["Company 1", "Company 2"],
+        rows: [
+          "Company name",
+          "Revenue (last year)",
+          "Revenue growth (3yr)",
+          "Net profit margin",
+          "P/E ratio",
+          "Market cap",
+          "ROE",
+          "Debt-to-Equity",
+          "Dividend yield",
+          "Competitive moat",
+          "Biggest risk",
+          "Which would I buy and why?"
+        ]
+      }
+    },
+    {
+      id: "eq_e", title: "The ₹1 Lakh Portfolio — If You Had to Invest Today", time: "30 min",
+      description: "Imagine you have ₹1,00,000 to invest in the Indian stock market RIGHT NOW. You have to allocate it across at least 3 different companies or funds. You cannot put more than ₹40,000 in one place. Justify every decision with data from your research. This forces you to think like an investor, not a spectator.",
+      template: {
+        type: "career_log",
+        careers: [
+          {
+            label: "Investment 1",
+            fields: [
+              "Company / Fund name",
+              "Amount allocated (₹)",
+              "Why this one? (metrics that convinced me)",
+              "How long would I hold? (months/years)",
+              "What would make me sell?"
+            ]
+          },
+          {
+            label: "Investment 2",
+            fields: [
+              "Company / Fund name",
+              "Amount allocated (₹)",
+              "Why this one?",
+              "How long would I hold?",
+              "What would make me sell?"
+            ]
+          },
+          {
+            label: "Investment 3",
+            fields: [
+              "Company / Fund name",
+              "Amount allocated (₹)",
+              "Why this one?",
+              "How long would I hold?",
+              "What would make me sell?"
+            ]
+          },
+          {
+            label: "Portfolio Summary",
+            fields: [
+              "Total equity vs debt allocation (e.g. 80% stocks, 20% index fund)",
+              "Overall risk level of this portfolio (low/medium/high) and why",
+              "What would panic me into selling everything — and should I?",
+              "What did CP's session change about how you'd allocate this?"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+
+  pitchBack: {
+    title: "Week 8 Pitch-Back — The Investment Committee (15 min)",
+    instructions: "Present like you're pitching to a real investment committee. Stand up. Use data. Own your conviction.",
+    points: [
+      "Present your full stock analysis from Activity 8c — company, metrics, moat, risks, and your buy/hold/sell verdict",
+      "Show your head-to-head competitor comparison — which company won and why?",
+      "Present your ₹1 lakh portfolio — walk through every allocation decision with justification",
+      "What's ONE metric or concept from this week that completely changed how you see money and investing?",
+      "If you could give one piece of investing advice to your parents right now, what would it be — and why?"
+    ],
+    format: "This is an investment committee presentation. Every number you say should be real. Every opinion should be backed by data. CP will ask hard questions — that's the point. If he disagrees with your thesis, defend it."
+  },
+
+  reflection: "Before this week, how did you think about the stock market? What specifically changed? Name ONE company you want to follow for the next 6 months and explain why you chose it."
+},
   {
-    id: 8, phase: 2, title: "Tech, AI & the Future", subtitle: "Careers that didn't exist 5 years ago",
+    id: 9, phase: 2, title: "Tech, AI & the Future", subtitle: "Careers that didn't exist 5 years ago",
     gain: "Understand how tech reshapes every industry. Discover tech-adjacent careers without coding.",
     color: "#6C5CE7", icon: "🤖",
     mentor: { key: "nishant", topic: "Technology as a Career Multiplier",
@@ -469,7 +975,7 @@ learning: {
   },
   // ══ PHASE 3 ══
   {
-    id: 9, phase: 3, title: "GTM & Customer Acquisition", subtitle: "How businesses actually get customers",
+    id: 10, phase: 3, title: "GTM & Customer Acquisition", subtitle: "How businesses actually get customers",
     gain: "Understand the complete customer journey and why EVERY role connects to getting customers.",
     color: "#F39C12", icon: "📣",
     mentor: { key: "nishant", topic: "GTM from Zero — Launching Products & Acquiring Customers",
@@ -499,7 +1005,7 @@ learning: {
     reflection: "Every job connects to getting customers. How does this change your career thinking?"
   },
   {
-    id: 10, phase: 3, title: "Leadership & Organizations", subtitle: "How large companies work — and leaders think",
+    id: 11, phase: 3, title: "Leadership & Organizations", subtitle: "How large companies work — and leaders think",
     gain: "Understand org structures, cross-functional collaboration, and how leaders make high-stakes decisions.",
     color: "#E74C3C", icon: "👔",
     mentor: { key: "mitul", topic: "The CEO's Brain — Problems at Scale",
@@ -532,7 +1038,7 @@ learning: {
     reflection: "Do you see yourself as a leader? What kind?"
   },
   {
-    id: 11, phase: 3, title: "Thinking at Scale", subtitle: "Large numbers, big systems, how the economy works",
+    id: 12, phase: 3, title: "Thinking at Scale", subtitle: "Large numbers, big systems, how the economy works",
     gain: "Develop intuition for large numbers and understand how businesses and economies operate at scale.",
     color: "#8E44AD", icon: "🔢",
     mentor: { key: "cp", topic: "Feeling Large Numbers — ₹1 Lakh to ₹1,000 Crore",
@@ -562,7 +1068,7 @@ learning: {
   },
   // ══ PHASE 4 ══
   {
-    id: 12, phase: 4, title: "The Builder Week", subtitle: "Stop researching. Make something.",
+    id: 13, phase: 4, title: "The Builder Week", subtitle: "Stop researching. Make something.",
     gain: "Ship a real project in 5 days and prove you can make things.",
     color: "#28A745", icon: "🔨",
     mentor: { key: "nishant", topic: "How to Ship — GTM for Your Project",
@@ -582,7 +1088,7 @@ learning: {
     reflection: "You MADE something. How does that feel?"
   },
   {
-    id: 13, phase: 4, title: "Skills & Learning Roadmap", subtitle: "What to learn next",
+    id: 14, phase: 4, title: "Skills & Learning Roadmap", subtitle: "What to learn next",
     gain: "Build a 6-month self-learning plan with specific courses and milestones.",
     color: "#E17055", icon: "🎯",
     mentor: { key: "kanika", topic: "Skills That Get You Hired vs. Look Good on Paper",
@@ -603,7 +1109,7 @@ learning: {
     reflection: "In control of your learning now?"
   },
   {
-    id: 14, phase: 4, title: "Decision Framework", subtitle: "Choosing your next move",
+    id: 15, phase: 4, title: "Decision Framework", subtitle: "Choosing your next move",
     gain: "Leave with 2-3 clear paths and a 30-day action plan. Most 17-year-old decisions are reversible.",
     color: "#8338EC", icon: "🗺️",
     mentor: { key: "mitul", topic: "First Principles for Life Decisions",
@@ -628,7 +1134,7 @@ learning: {
     reflection: "Which path excites you? Choosing what to explore NEXT."
   },
   {
-    id: 15, phase: 4, title: "Toolkit & The Letter", subtitle: "Leave with assets, not just ideas",
+    id: 16, phase: 4, title: "Toolkit & The Letter", subtitle: "Leave with assets, not just ideas",
     gain: "Graduate with personal narrative, network map, online presence, and a letter to your future self.",
     color: "#7B2D8E", icon: "✉️",
     mentor: { key: "cp", topic: "Your Personal Balance Sheet — Assets for Life",
